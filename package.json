@@ -1,0 +1,17 @@
+{
+  "author": "oanguenot",
+  "name": "WebSocket-helper",
+  "description": "WebSocket with fun",
+  "version": "1.0.0",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {},
+  "dependencies": {
+    "websocket": "~1.0.14",
+    "express": "~4.10.6"
+  },
+  "devDependencies": {}
+}

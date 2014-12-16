@@ -1,0 +1,87 @@
+<!doctype html>
+	<head>
+		<title>WebSocket</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+
+	<body>
+	<h1>Demo Client using Websocket</h1>
+
+	<input type="button" id="connectBtn" value="Connect">
+	<input type="button" id="sendBtn" value="Send">
+	<input type="button" id="closeBtn" value="Close">
+
+
+	<script type="text/javascript">
+
+
+		var ws = null;
+
+		var connectBtn = document.getElementById("connectBtn");
+		connectBtn.addEventListener("click", function() { 
+
+			if(window.location.protocol === 'http:') {
+
+				console.log("Create unsecure websocket connection");
+
+				ws = new WebSocket("ws://localhost:8887", "json");
+
+				ws.onopen = function(evt) {
+					console.log("Client connected", evt);
+				};
+
+				ws.onmessage = function(evt) {
+					console.log("client received", evt);
+				};
+
+				ws.onerror = function(evt) {
+					console.log("client error", evt);
+				};
+
+				ws.onclose = function(evt) {
+					console.log("client disconnected", evt);
+				};	
+			}
+			else {
+
+				console.log("Create secure websocket connection");
+
+				ws = new WebSocket("wss://localhost:8886", "json");
+
+				ws.onopen = function(evt) {
+					console.log("Secure Client connected", evt);
+				};
+
+				ws.onmessage = function(evt) {
+					console.log(" Secure client received", evt);
+				};
+
+				ws.onerror = function(evt) {
+					console.log("Secure client error", evt);
+				};
+
+				ws.onclose = function(evt) {
+					console.log("Secure client disconnected", evt);
+				};	
+			}
+
+		});
+
+		var sendBtn = document.getElementById('sendBtn');
+		sendBtn.addEventListener("click", function() {
+			ws.send("Hello you!");
+		});
+
+		var closeBtn = document.getElementById('closeBtn');
+		closeBtn.addEventListener("click", function() {
+			ws.close();
+		});
+
+	</script>
+
+	</body>
+
+</html>
